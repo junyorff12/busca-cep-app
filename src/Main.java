@@ -1,7 +1,11 @@
+import service.BuscaCepService;
+
+import java.io.IOException;
+import java.net.http.HttpResponse;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException {
         int option = 1;
         int cepToSearch = 0;
         Scanner sc = new Scanner(System.in);
@@ -18,11 +22,14 @@ public class Main {
                 System.out.println("== Cep digitado: " + cepToSearch + " ==");
                 System.out.println("===========================");
                 System.out.println(" ");
-            }
+                HttpResponse data = BuscaCepService.buscaCep(cepToSearch);
 
-            if (option == 0){
+                System.out.println(data.body());
+            } else if (option == 0){
                 System.out.println("Programa finalizado.");
                 break;
+            } else {
+                System.out.println("Opção invalida!!!");
             }
 
         }
