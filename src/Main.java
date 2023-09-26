@@ -1,7 +1,7 @@
 import model.Andress;
-import service.AndressFileWriterService;
-import service.CepToAndressHandler;
-import service.GetCepService;
+import service.AndressFileWriter;
+import service.DataToAndressHandler;
+import service.GetAndressData;
 
 import java.net.http.HttpResponse;
 import java.util.Scanner;
@@ -25,13 +25,22 @@ public class Main {
                 System.out.println("== Cep digitado: " + cepToSearch + " ==");
                 System.out.println("===========================");
                 System.out.println(" ");
-                HttpResponse<String> data = GetCepService.getCep(cepToSearch);
+                HttpResponse<String> data = GetAndressData.getAndressData(cepToSearch);
 
-                CepToAndressHandler cepToAndressHandler = new CepToAndressHandler();
-                Andress andress = cepToAndressHandler.cepToAndress(data.body());
+                DataToAndressHandler dataToAndress = new DataToAndressHandler();
+                Andress andress = dataToAndress.cepToAndress(data.body());
 
-                AndressFileWriterService andressWriter = new AndressFileWriterService();
-                andressWriter.andressWrite(andress);
+                if(andress.cep() != null) {
+
+                    System.out.println("Criando arquivo json!");
+                    System.out.println("Lendo arquivo Json criado!");
+                    AndressFileWriter andressWriter = new AndressFileWriter();
+                    andressWriter.andressWrite(andress);
+                } else {
+                    System.out.println("Cep não encontrado! " + data.body());
+                    return;
+                }
+
 
             } else if (option == 0) {
                 System.out.println("Programa finalizado.");

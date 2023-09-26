@@ -1,11 +1,9 @@
 package service;
 
-import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import model.Andress;
 
-public class CepToAndressHandler {
+public class DataToAndressHandler {
 
 
     public Andress cepToAndress(String cep) {

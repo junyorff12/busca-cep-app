@@ -1,15 +1,16 @@
 package service;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import model.Andress;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class AndressFileWriterService {
+public class AndressFileWriter {
     public void andressWrite(Andress andress) {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         try {
             FileWriter writer = new FileWriter(andress.cep() + ".json");
