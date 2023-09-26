@@ -12,11 +12,11 @@ public class AndressFileWriterService {
         Gson gson = new Gson();
 
         try {
-            FileWriter writer = new FileWriter("andress.json");
+            FileWriter writer = new FileWriter(andress.cep() + ".json");
             writer.write(gson.toJson(andress));
             writer.close();
 
-            FileReader reader = new FileReader("andress.json");
+            FileReader reader = new FileReader(andress.cep() + ".json");
             int i;
             while ((i = reader.read()) != -1) {
                 System.out.print((char) i);
